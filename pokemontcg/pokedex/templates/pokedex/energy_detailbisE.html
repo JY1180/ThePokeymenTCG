@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% load django_vite %} {% block content %}
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+ 	<!-- jQuery library -->
+ 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ 
+ 	<!-- Latest compiled JavaScript -->
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+</head>
+<div id="app">
+	<app></app>
+</div>
+{% endblock content %} {% block js %} {{ block.super }}
+<script>
+	var ext_id = {{ energy_id | safe }};
+    var ext_energy_dico = {{ energy_list | safe }};
+	var ext_energy_detail_js_url = '{% url 'pokedex:energy_detail_js' energy_id %}';
+	var ext_energy_list_url = '{% url 'pokedex:energy_list' %}';
+	var ext_energy_delete_url = '{% url 'pokedex:energy_delete' energy_id %}';
+
+</script>
+{% vite_hmr_client %} {% vite_asset 'src/apps/energy_detail/energy_detail.js' %} {% endblock js %}
